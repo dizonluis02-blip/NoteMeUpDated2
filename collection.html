@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#211a35">
+    <title>My Collection | NoteMe</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="collection.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="site-header">
+        <a href="index.html" class="logo">NoteMe</a>
+
+        <div class="header-actions">
+            <a href="checkout.html" class="header-link">
+                Cart <span class="cart-count" id="headerCartCount">0</span>
+            </a>
+            <a href="index.html" class="header-link collection-home-link">Home</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav class="menu-panel" id="mainNav">
+            <p class="menu-title">Explore NoteMe</p>
+            <a href="index.html#shop">Browse Products</a>
+            <a href="collection.html" aria-current="page">My Collection</a>
+            <a href="product-overview.html">Products Overview</a>
+            <a href="design-customization.html">Customization Service <span>✦</span></a>
+            <a href="checkout.html" class="menu-cart">Cart <span class="cart-count">0</span></a>
+            <a href="pending-orders.html">My Orders <span>→</span></a>
+            <a href="about-support.html">About &amp; Support <span>→</span></a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="collection-hero">
+            <div class="collection-hero-copy">
+                <span class="eyebrow">THE NOTEME CANVA COLLECTION · 19 PAGES</span>
+                <h1>My collection<span>.</span></h1>
+                <p>Explore the designs, color palettes, game themes, and customized templates from my Canva collection.</p>
+                <a class="btn" href="#browse-collection">Browse all 19 existing collections ↓</a>
+            </div>
+            <div class="collection-hero-note" aria-hidden="true">
+                <span>19 COLLECTION PAGES</span>
+                <strong>4 collections</strong>
+                <i>✦</i>
+            </div>
+        </section>
+
+        <section class="university-feature" aria-labelledby="canva-title">
+            <div class="university-copy">
+                <span class="eyebrow">THE ORIGINAL DESIGNS</span>
+                <h2 id="canva-title">See every page.</h2>
+                <p>The collection follows the four sections in the Canva design: University Series, Color Combinations, Game Series, and Customized Templates. Browse the original layouts and photos in the viewer.</p>
+                <a class="text-link" href="https://www.canva.com/design/DAHa57A-i54/OMxv0fcimcucsYu2TTqeHA/view" target="_blank" rel="noopener noreferrer">Open the full collection in Canva ↗</a>
+            </div>
+            <div class="university-viewer">
+                <iframe
+                    src="https://www.canva.com/design/DAHa57A-i54/OMxv0fcimcucsYu2TTqeHA/view?embed"
+                    title="NoteMe Canva collection, all 19 pages"
+                    loading="lazy"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="collection-browse" id="browse-collection">
+            <div class="collection-heading">
+                <div>
+                    <span class="eyebrow">19 PAGES · 4 COLLECTIONS</span>
+                    <h2>Browse my collection</h2>
+                    <p>Choose a Canva section to explore its page designs.</p>
+                </div>
+                <span class="collection-total" id="collectionTotal">19 pages</span>
+            </div>
+
+            <div class="collection-controls">
+                <div class="category-filters" role="group" aria-label="Filter Canva pages by collection">
+                    <button class="category-filter active" type="button" data-category="all" aria-pressed="true">All pages</button>
+                    <button class="category-filter" type="button" data-category="university-series" aria-pressed="false">University Series <span>5</span></button>
+                    <button class="category-filter" type="button" data-category="color-combinations" aria-pressed="false">Color Combinations <span>5</span></button>
+                    <button class="category-filter" type="button" data-category="game-series" aria-pressed="false">Game Series <span>5</span></button>
+                    <button class="category-filter" type="button" data-category="customized-templates" aria-pressed="false">Customized Templates <span>4</span></button>
+                </div>
+                <label class="collection-search">
+                    <span class="sr-only">Search Canva pages</span>
+                    <input type="search" id="collectionSearch" placeholder="Search collections..." autocomplete="off">
+                    <span aria-hidden="true">⌕</span>
+                </label>
+            </div>
+
+            <div class="collection-grid" id="collectionGrid" aria-live="polite"></div>
+            <p class="collection-empty" id="collectionEmpty" hidden>No pages match that search. Try another name or collection.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a href="index.html" class="logo">NoteMe</a>
+        <p>Digital things that work for you.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about-support.html#contact">Contact Us</a>
+        </div>
+        <p class="copyright">© 2026 NoteMe. All rights reserved.</p>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

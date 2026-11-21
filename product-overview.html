@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteMe | Product Overview</title>
+
+    <link rel="stylesheet" href="features.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <a href="index.html" class="brand">NoteMe<span>.</span></a>
+
+    <div class="header-actions">
+        <a href="checkout.html" class="header-cart" aria-label="View cart">
+             <span class="cart-label">Cart</span> <span class="cart-count">0</span>
+        </a>
+        <a href="index.html" class="home-button">Home</a>
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            aria-controls="mainNav"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <nav class="menu-panel" id="mainNav">
+        <div class="menu-title">Explore NoteMe</div>
+        <a href="product-overview.html" class="active">Products</a>
+        <a href="design-customization.html">Design Customization</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="pending-orders.html">My Orders</a>
+        <a href="about-support.html">About &amp; Support</a>
+    </nav>
+</header>
+
+
+<!-- HERO -->
+<section class="page-hero">
+    <span class="eyebrow">THE NOTEME COLLECTION</span>
+
+    <h1>Find your next <em>favorite.</em></h1>
+
+    <p>
+        Thoughtfully designed digital products to help you
+        stay organized, creative, and productive.
+    </p>
+
+    <a href="#products" class="btn">Explore Products ↗</a>
+</section>
+
+
+<!-- PRODUCT OVERVIEW -->
+<main class="container">
+
+    <div class="products-heading">
+        <div>
+            <span class="eyebrow">MADE FOR YOUR EVERYDAY</span>
+            <h2 class="section-title">Product Overview</h2>
+            <p class="muted">Little digital things that make a big difference.</p>
+        </div>
+
+        <span class="product-count">20 PRODUCTS</span>
+    </div>
+
+
+    <div class="grid" id="products">
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/weekly-planner.png" alt="Weekly Reset Planner">
+            </div>
+            <div class="card-body">
+                <h3>Weekly Reset Planner</h3>
+                <p class="muted">A digital planner for weekly goals, priorities, habits, and reflections.</p>
+                <div class="price">₱149</div>
+                <div class="card-actions">
+                    <button data-overview="planner">View Details</button>
+                    <button data-cart="planner">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/study-kit.png" alt="Study Session Kit">
+            </div>
+            <div class="card-body">
+                <h3>Study Session Kit</h3>
+                <p class="muted">Study notes, revision planning, and progress tracking templates.</p>
+                <div class="price">₱99</div>
+                <div class="card-actions">
+                    <button data-overview="study">View Details</button>
+                    <button data-cart="study">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/creator-bundle.png" alt="Creator Business Bundle">
+            </div>
+            <div class="card-body">
+                <h3>Creator Business Bundle</h3>
+                <p class="muted">Templates for content planning, creative projects, and client organization.</p>
+                <div class="price">₱249</div>
+                <div class="card-actions">
+                    <button data-overview="creator">View Details</button>
+                    <button data-cart="creator">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/digital-journal.png" alt="Everyday Digital Journal">
+            </div>
+            <div class="card-body">
+                <h3>Everyday Digital Journal</h3>
+                <p class="muted">A flexible digital journal for daily notes, thoughts, and ideas.</p>
+                <div class="price">₱129</div>
+                <div class="card-actions">
+                    <button data-overview="journal">View Details</button>
+                    <button data-cart="journal">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/budget-tracker.png" alt="Monthly Budget Tracker">
+            </div>
+            <div class="card-body">
+                <h3>Monthly Budget Tracker</h3>
+                <p class="muted">Track your expenses, savings, and monthly budget.</p>
+                <div class="price">₱119</div>
+                <div class="card-actions">
+                    <button data-overview="budget">View Details</button>
+                    <button data-cart="budget">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/habit-tracker.png" alt="Habit Tracker Bundle">
+            </div>
+            <div class="card-body">
+                <h3>Habit Tracker Bundle</h3>
+                <p class="muted">Build consistent routines and monitor your daily habits.</p>
+                <div class="price">₱89</div>
+                <div class="card-actions">
+                    <button data-overview="habit">View Details</button>
+                    <button data-cart="habit">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/aesthetic-notes.png" alt="Aesthetic Digital Notes">
+            </div>
+            <div class="card-body">
+                <h3>Aesthetic Digital Notes</h3>
+                <p class="muted">Organized digital notes for school, work, and everyday ideas.</p>
+                <div class="price">₱99</div>
+                <div class="card-actions">
+                    <button data-overview="notes">View Details</button>
+                    <button data-cart="notes">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/goal-workbook.png" alt="Goal Setting Workbook">
+            </div>
+            <div class="card-body">
+                <h3>Goal Setting Workbook</h3>
+                <p class="muted">Plan your goals and break them into achievable steps.</p>
+                <div class="price">₱109</div>
+                <div class="card-actions">
+                    <button data-overview="goals">View Details</button>
+                    <button data-cart="goals">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/meal-planner.png" alt="Meal Planner">
+            </div>
+            <div class="card-body">
+                <h3>Meal Planner</h3>
+                <p class="muted">Organize your weekly meals and grocery lists.</p>
+                <div class="price">₱89</div>
+                <div class="card-actions">
+                    <button data-overview="meal">View Details</button>
+                    <button data-cart="meal">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/wellness-journal.png" alt="Wellness Journal">
+            </div>
+            <div class="card-body">
+                <h3>Wellness Journal</h3>
+                <p class="muted">Keep track of your wellness routines and personal reflections.</p>
+                <div class="price">₱129</div>
+                <div class="card-actions">
+                    <button data-overview="fitness">View Details</button>
+                    <button data-cart="fitness">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/content-calendar.png" alt="Content Calendar">
+            </div>
+            <div class="card-body">
+                <h3>Content Calendar</h3>
+                <p class="muted">Plan and organize your social media content.</p>
+                <div class="price">₱149</div>
+                <div class="card-actions">
+                    <button data-overview="content">View Details</button>
+                    <button data-cart="content">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/resume-kit.png" alt="Resume Template Kit">
+            </div>
+            <div class="card-body">
+                <h3>Resume Template Kit</h3>
+                <p class="muted">Create organized and professional-looking resumes.</p>
+                <div class="price">₱99</div>
+                <div class="card-actions">
+                    <button data-overview="resume">View Details</button>
+                    <button data-cart="resume">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/savings-kit.png" alt="Savings Challenge Kit">
+            </div>
+            <div class="card-body">
+                <h3>Savings Challenge Kit</h3>
+                <p class="muted">Set savings goals and track your financial progress.</p>
+                <div class="price">₱79</div>
+                <div class="card-actions">
+                    <button data-overview="finance">View Details</button>
+                    <button data-cart="finance">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/reading-journal.png" alt="Reading Journal">
+            </div>
+            <div class="card-body">
+                <h3>Reading Journal</h3>
+                <p class="muted">Record your reading progress, favorite books, and notes.</p>
+                <div class="price">₱89</div>
+                <div class="card-actions">
+                    <button data-overview="reading">View Details</button>
+                    <button data-cart="reading">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/travel-planner.png" alt="Travel Planner">
+            </div>
+            <div class="card-body">
+                <h3>Travel Planner</h3>
+                <p class="muted">Organize itineraries, travel schedules, and trip expenses.</p>
+                <div class="price">₱119</div>
+                <div class="card-actions">
+                    <button data-overview="travel">View Details</button>
+                    <button data-cart="travel">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/project-management.png" alt="Project Management Kit">
+            </div>
+            <div class="card-body">
+                <h3>Project Management Kit</h3>
+                <p class="muted">Manage tasks, deadlines, and project progress.</p>
+                <div class="price">₱179</div>
+                <div class="card-actions">
+                    <button data-overview="project">View Details</button>
+                    <button data-cart="project">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/presentation-kit.png" alt="Presentation Template Kit">
+            </div>
+            <div class="card-body">
+                <h3>Presentation Template Kit</h3>
+                <p class="muted">Ready-to-use templates for school and professional presentations.</p>
+                <div class="price">₱159</div>
+                <div class="card-actions">
+                    <button data-overview="presentation">View Details</button>
+                    <button data-cart="presentation">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/business-starter.png" alt="Small Business Starter Kit">
+            </div>
+            <div class="card-body">
+                <h3>Small Business Starter Kit</h3>
+                <p class="muted">Organize your small business tasks, products, and planning.</p>
+                <div class="price">₱199</div>
+                <div class="card-actions">
+                    <button data-overview="business">View Details</button>
+                    <button data-cart="business">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/productivity-kit.png" alt="Daily Productivity Kit">
+            </div>
+            <div class="card-body">
+                <h3>Daily Productivity Kit</h3>
+                <p class="muted">Stay organized with daily schedules, priorities, and task lists.</p>
+                <div class="price">₱139</div>
+                <div class="card-actions">
+                    <button data-overview="daily">View Details</button>
+                    <button data-cart="daily">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="card">
+            <div class="product-art">
+                <img src="images/case-file.png" alt="Case File">
+            </div>
+            <div class="card-body">
+                <h3>Case File</h3>
+                <p class="muted">Digital notes and document templates designed to make organizing your schoolwork easier.</p>
+                <div class="price">₱149</div>
+                <div class="card-actions">
+                    <button data-overview="case-file">View Details</button>
+                    <button data-cart="case-file">Add to Cart +</button>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</main>
+
+
+<!-- PRODUCT DETAILS MODAL -->
+<div class="modal-backdrop" id="detailModal">
+    <div class="modal">
+        <button class="close" id="closeDetail" type="button">&times;</button>
+        <div id="detailContent"></div>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div>
+        <a href="index.html" class="brand">NoteMe<span>.</span></a>
+        <p>Digital things that work for u.</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about-support.html">Contact</a>
+    </div>
+
+    <p>© 2026 NoteMe. All rights reserved.</p>
+</footer>
+
+
+<!-- LOAD JAVASCRIPT ONCE, AT THE END -->
+<script src="auth.js"></script>
+<script src="features.js"></script>
+
+</body>
+</html>
