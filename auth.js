@@ -1,83 +1,18 @@
 (function () {
-    const accountsKey = "notemeAccounts";
-    const currentUserKey = "notemeCurrentUser";
     const returnToKey = "notemeReturnTo";
-
-    function readAccounts() {
-        try {
-            const accounts = JSON.parse(localStorage.getItem(accountsKey) || "[]");
-            return Array.isArray(accounts) ? accounts.filter(account =>
-                account &&
-                typeof account.username === "string" &&
-                typeof account.email === "string" &&
-                typeof account.salt === "string" &&
-                typeof account.passwordHash === "string"
-            ) : [];
-        } catch {
-            return [];
-        }
-    }
-
-    function getCurrentUser() {
-        try {
-            const user = JSON.parse(localStorage.getItem(currentUserKey) || "null");
-            return user && typeof user.username === "string" ? user : null;
-        } catch {
-            return null;
-        }
-    }
+    let cachedUser = null;
 
     function setFormError(element, message) {
         if (element) element.textContent = message;
     }
 
-    function toHex(buffer) {
-        return Array.from(new Uint8Array(buffer), byte =>
-            byte.toString(16).padStart(2, "0")
-        ).join("");
-    }
-
-    async function hashPassword(password, salt) {
-        if (!window.crypto?.subtle || !window.TextEncoder) {
-            throw new Error("Secure password hashing is unavailable in this browser. Open NoteMe using HTTPS or localhost.");
-        }
-
-        const key = await window.crypto.subtle.importKey(
-            "raw",
-            new TextEncoder().encode(password),
-            "PBKDF2",
-            false,
-            ["deriveBits"]
-        );
-        const bits = await window.crypto.subtle.deriveBits({
-            name: "PBKDF2",
-            salt,
-            iterations: 120000,
-            hash: "SHA-256"
-        }, key, 256);
-
-        return toHex(bits);
-    }
-
-    function makeSalt() {
-        const salt = new Uint8Array(16);
-        window.crypto.getRandomValues(salt);
-        return toHex(salt);
-    }
-
-    function bytesFromHex(hex) {
-        const bytes = new Uint8Array(hex.length / 2);
-        for (let index = 0; index < bytes.length; index += 1) {
-            bytes[index] = parseInt(hex.slice(index * 2, index * 2 + 2), 16);
-        }
-        return bytes;
-    }
-
-    function getReturnTarget() {
+    function getReturnTarget(user) {
         const target = sessionStorage.getItem(returnToKey);
         sessionStorage.removeItem(returnToKey);
 
-        if (!target) return "index.html";
+        if (!target) {
+            return user?.role === "admin" ? "admin.html" : "index.html";
+        }
 
         try {
             const url = new URL(target);
@@ -94,17 +29,28 @@
         return "index.html";
     }
 
-    function completeAuthentication(user) {
-        localStorage.setItem(currentUserKey, JSON.stringify({
-            username: user.username,
-            name: user.name,
-            email: user.email
-        }));
-        window.location.assign(getReturnTarget());
+    function updateNavForUser(user) {
+        cachedUser = user;
+        const signedIn = Boolean(user);
+        document.querySelectorAll("#loginLink, #menuLogin, #menuSignup, .header-signup").forEach(link => {
+            link.style.display = signedIn ? "none" : "";
+        });
+        document.querySelectorAll("#logoutBtn, #menuLogout").forEach(link => {
+            link.style.display = signedIn ? "" : "none";
+        });
     }
 
+    fetch("session.php")
+        .then(res => res.json())
+        .then(data => {
+            updateNavForUser(data.user || null);
+        })
+        .catch(() => {
+            updateNavForUser(null);
+        });
+
     window.notemeRequireAccount = function () {
-        if (getCurrentUser()) return true;
+        if (cachedUser) return true;
 
         try {
             sessionStorage.setItem(returnToKey, window.location.href);
@@ -117,15 +63,10 @@
         return false;
     };
 
-    const signedIn = Boolean(getCurrentUser());
-    document.querySelectorAll("#loginLink, #menuLogin, #menuSignup, .header-signup").forEach(link => {
-        if (signedIn) link.style.display = "none";
-    });
     document.querySelectorAll("#logoutBtn, #menuLogout").forEach(link => {
-        if (signedIn) link.style.display = "";
-        link.addEventListener("click", event => {
+        link.addEventListener("click", async event => {
             event.preventDefault();
-            localStorage.removeItem(currentUserKey);
+            await fetch("logout.php", { method: "POST" });
             window.location.assign("index.html");
         });
     });
@@ -136,36 +77,35 @@
             event.preventDefault();
             const errorElement = document.getElementById("signupError");
             const submitButton = signupForm.querySelector('[type="submit"]');
-            const username = document.getElementById("su-username").value.trim();
-            const name = document.getElementById("su-name").value.trim();
-            const email = document.getElementById("su-email").value.trim();
-            const password = document.getElementById("su-password").value;
 
-            if (readAccounts().some(account =>
-                account.username.toLowerCase() === username.toLowerCase() ||
-                account.email.toLowerCase() === email.toLowerCase()
-            )) {
-                setFormError(errorElement, "That username or email is already registered. Log in or use different details.");
-                return;
-            }
+            const payload = {
+                username: document.getElementById("su-username").value.trim(),
+                name: document.getElementById("su-name").value.trim(),
+                age: Number(document.getElementById("su-age").value),
+                email: document.getElementById("su-email").value.trim(),
+                address: document.getElementById("su-address").value.trim(),
+                password: document.getElementById("su-password").value
+            };
 
             submitButton.disabled = true;
             setFormError(errorElement, "");
+
             try {
-                const salt = makeSalt();
-                const account = {
-                    username,
-                    name,
-                    email,
-                    salt,
-                    passwordHash: await hashPassword(password, bytesFromHex(salt))
-                };
-                const accounts = readAccounts();
-                accounts.push(account);
-                localStorage.setItem(accountsKey, JSON.stringify(accounts));
-                completeAuthentication(account);
-            } catch (error) {
-                setFormError(errorElement, error.message || "Unable to create your account. Please try again.");
+                const response = await fetch("signup.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+
+                if (!response.ok || !data.ok) {
+                    setFormError(errorElement, data.message || "Unable to create your account. Please try again.");
+                    return;
+                }
+
+                window.location.assign(getReturnTarget(data.user));
+            } catch {
+                setFormError(errorElement, "Unable to reach the server. Make sure PHP/Apache is running.");
             } finally {
                 submitButton.disabled = false;
             }
@@ -178,28 +118,33 @@
             event.preventDefault();
             const errorElement = document.getElementById("loginError");
             const submitButton = loginForm.querySelector('[type="submit"]');
-            const username = document.getElementById("login-username").value.trim();
-            const password = document.getElementById("login-password").value;
 
-            const account = readAccounts().find(item =>
-                item.username.toLowerCase() === username.toLowerCase()
-            );
-            if (!account) {
-                setFormError(errorElement, "Account not found. Please sign up first.");
-                return;
-            }
+            const selectedRole = loginForm.querySelector('input[name="login-as"]:checked')?.value || "customer";
+            const payload = {
+                username: document.getElementById("login-username").value.trim(),
+                password: document.getElementById("login-password").value,
+                loginAs: selectedRole
+            };
 
             submitButton.disabled = true;
             setFormError(errorElement, "");
+
             try {
-                const passwordHash = await hashPassword(password, bytesFromHex(account.salt));
-                if (passwordHash !== account.passwordHash) {
-                    setFormError(errorElement, "Incorrect username or password.");
+                const response = await fetch("login.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+
+                if (!response.ok || !data.ok) {
+                    setFormError(errorElement, data.message || "Unable to log in. Please try again.");
                     return;
                 }
-                completeAuthentication(account);
-            } catch (error) {
-                setFormError(errorElement, error.message || "Unable to log in. Please try again.");
+
+                window.location.assign(getReturnTarget(data.user));
+            } catch {
+                setFormError(errorElement, "Unable to reach the server. Make sure PHP/Apache is running.");
             } finally {
                 submitButton.disabled = false;
             }
